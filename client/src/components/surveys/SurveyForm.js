@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { Link } from 'react-router-dom';
 import SurveyField from './SurveyField';
+
+const FIELDS = [
+    { label: 'Survey Title', name: 'Title' },
+    { label: 'Subject Line', name: 'Subject' },
+    { label: 'Email Body', name: 'Email_Body' },
+    { label: 'Recipient List', name: 'Recipients' }
+];
 
 class SurveyForm extends Component {
 
     renderFields () {
-        return (
-            <div>
-                <Field label="Survey Title" type="text" name="Title" component={SurveyField} />
-                <Field label="Subject Line" type="text" name="Subject" component={SurveyField} />
-                <Field label="Email Body" type="text" name="Email_Body" component={SurveyField} />
-                <Field label="Recipient List" type="text" name="Recipients" component={SurveyField} />
-
-            </div>
-        )
+        return FIELDS.map(({ label, name }) => {
+            return <Field key={name} component={SurveyField} type="text" label={label} name={name} />
+        })
     }
 
     render() {
@@ -23,7 +25,13 @@ class SurveyForm extends Component {
                     values => console.log(values)
                 )}>
                     {this.renderFields()}
-                    <button type="submit">Submit</button>
+                    <Link to="/surveys" className="red btn-flat white-text" >
+                        Cancel
+                    </Link>
+                    <button type="submit" className="teal btn-flat right white-text">
+                        Next
+                        <i className="material-icons right">done</i>
+                    </button>
                 </form>
             </div>
         )
