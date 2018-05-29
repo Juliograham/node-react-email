@@ -42,7 +42,10 @@ function validate(values) {
     const errors = {};
 
     if (!values.title) {
-        errors.title = 'You must provide a title.';
+        errors.Title = 'You must provide a title.';
+        errors.Subject = 'You must provide a subject.';
+        errors.Email_Body = 'You must provide an email body.';
+        errors.Recipients = 'You must provide a list of recipients.';
     }
 
     return errors;
