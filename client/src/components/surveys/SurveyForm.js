@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import SurveyField from './SurveyField';
@@ -41,12 +42,11 @@ class SurveyForm extends Component {
 function validate(values) {
     const errors = {};
 
-    if (!values.title) {
-        errors.Title = 'You must provide a title.';
-        errors.Subject = 'You must provide a subject.';
-        errors.Email_Body = 'You must provide an email body.';
-        errors.Recipients = 'You must provide a list of recipients.';
-    }
+    _.each(FIELDS, ({ name }) => {
+        if (!values[name]) {
+            errors[name] = 'You must provide a value.'
+        }
+    })
 
     return errors;
 }
